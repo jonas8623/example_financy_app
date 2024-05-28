@@ -14,12 +14,18 @@ class AppTextStyleConstant {
   static final onBoardingTextStyle = GoogleFonts.inter(
     fontSize: 36.0,
     fontWeight: FontWeight.w700,
-    color: AppColorConstant.greenColor2,
+    color: AppColorConstant.primaryColor,
   );
 
   static final smallText = GoogleFonts.inter(
     fontSize: 16.0,
     fontWeight: FontWeight.w500,
-    color: AppColorConstant.greenColor2,
+    color: AppColorConstant.primaryColor,
+  );
+
+  static final TextStyle inputLabelTextStyle = GoogleFonts.inter(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w400,
+    color: AppColorConstant.darkGrey,
   );
 }

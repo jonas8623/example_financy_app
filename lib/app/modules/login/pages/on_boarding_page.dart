@@ -1,6 +1,5 @@
-import 'dart:developer';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../core/_export_core.dart';
 
 class OnBoardingPage extends StatelessWidget {
@@ -33,29 +32,24 @@ class OnBoardingPage extends StatelessWidget {
             ),
             _padding(top: 16.0),
             _text(
-                title: "Spend Smarter",
-                textStyle: AppTextStyleConstant.onBoardingTextStyle),
+              title: "Spend Smarter",
+              textStyle: AppTextStyleConstant.onBoardingTextStyle,
+            ),
             _text(
-                title: "Save More",
-                textStyle: AppTextStyleConstant.onBoardingTextStyle),
-            const ButtonComponent(text: "Get Started"),
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "Already have account? ",
-                    style: AppTextStyleConstant.smallText.copyWith(
-                      color: AppColorConstant.greyColor,
-                    ),
-                  ),
-                  TextSpan(
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => log('message'),
-                    text: "Sign in",
-                    style: AppTextStyleConstant.smallText.copyWith(),
-                  ),
-                ],
+              title: "Save More",
+              textStyle: AppTextStyleConstant.onBoardingTextStyle,
+            ),
+            ButtonComponent(
+              text: "Get Started",
+              onTap: () => Modular.to.navigate("sign_up"),
+            ),
+            RichTextComponent(
+              textStyle: AppTextStyleConstant.smallText.copyWith(
+                color: AppColorConstant.greyColor,
               ),
+              textStyleAction: AppTextStyleConstant.smallText.copyWith(),
+              text: "Already have account? ",
+              textAction: "Sign in",
             ),
             _padding(top: 40.0)
           ],

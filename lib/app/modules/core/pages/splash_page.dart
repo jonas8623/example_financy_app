@@ -1,8 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import '../../core/constants/app_color_constant.dart';
-import '../_export_splash.dart';
+import '../../login/_export_login.dart';
+import '../constants/app_color_constant.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -26,7 +26,7 @@ class SplashPage extends StatelessWidget {
         animationDuration: const Duration(seconds: 5),
         backgroundColor: AppColorConstant.backgroundSplash,
         nextScreen: const OnBoardingPage(),
-        nextRoute: "/on_boarding",
+        nextRoute: "/login/",
       ),
     );
   }

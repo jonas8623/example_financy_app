@@ -28,7 +28,7 @@ class OnBoardingPage extends StatelessWidget {
               flex: 2,
               child: Container(
                 color: AppColorConstant.backgroundOnBoarding,
-                child: Image.asset("assets/images/on_boarding.png"),
+                child: Image.asset("assets/images/onboarding_image.png"),
               ),
             ),
             _padding(top: 16.0),

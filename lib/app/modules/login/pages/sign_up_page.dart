@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../core/_export_core.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -8,7 +9,7 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
   late final GlobalKey<FormState> _formKey;
   late final TextEditingController _nameController;
   late final TextEditingController _emailController;
@@ -34,6 +35,9 @@ class _SignUpPageState extends State<SignUpPage> {
     String? hintText,
     TextCapitalization? textCapitalization,
     bool isPassword = false,
+    List<TextInputFormatter>? formatters,
+    FormFieldValidator? validator,
+    String? helperText,
   }) =>
       Padding(
         padding: const EdgeInsets.symmetric(
@@ -47,6 +51,9 @@ class _SignUpPageState extends State<SignUpPage> {
           hintText: hintText,
           textCapitalization: textCapitalization,
           isPassword: isPassword,
+          inputFormatters: formatters,
+          validator: validator,
+          helperText: helperText,
         ),
       );
 
@@ -55,12 +62,19 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           children: [
             _textFormField(
-              controller: _nameController,
-              labelText: "Your name",
-              hintText: "Jonas Felipe",
-              textInputType: TextInputType.name,
-              textCapitalization: TextCapitalization.words,
-            ),
+                controller: _nameController,
+                labelText: "Your name",
+                hintText: "JOHN DOE",
+                textInputType: TextInputType.name,
+                textCapitalization: TextCapitalization.words,
+                formatters: [UpperCaseTextFormatted()],
+                validator: (value) {
+                  validationList([
+                    () => isNotEmpty(value),
+                    () => hasNumber(value),
+                  ]);
+                  return null;
+                }),
             _textFormField(
               controller: _emailController,
               labelText: "Email",
@@ -71,11 +85,15 @@ class _SignUpPageState extends State<SignUpPage> {
               controller: _passwordController,
               labelText: "Your password",
               isPassword: true,
+              helperText:
+                  "Must have at least 8 characters, 1 capital letter and 1 number",
             ),
             _textFormField(
               controller: _confirmPasswordController,
               labelText: "Confirm your password",
               isPassword: true,
+              helperText:
+                  "Must have at least 8 characters, 1 capital letter and 1 number",
             ),
             const ButtonComponent(text: "Sign Up")
           ],
@@ -94,6 +112,10 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -105,11 +127,13 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             children: [
               _text(
-                  title: "Spend Smarter",
-                  textStyle: AppTextStyleConstant.onBoardingTextStyle),
+                title: "Spend Smarter",
+                textStyle: AppTextStyleConstant.onBoardingTextStyle,
+              ),
               _text(
-                  title: "Save More",
-                  textStyle: AppTextStyleConstant.onBoardingTextStyle),
+                title: "Save More",
+                textStyle: AppTextStyleConstant.onBoardingTextStyle,
+              ),
               Image.asset("assets/images/sign_up.png"),
               _form(),
               _padding(top: 16.0),

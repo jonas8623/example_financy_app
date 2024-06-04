@@ -11,7 +11,7 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Financy",
       routerConfig: Modular.routerConfig,
-      theme: ThemeConstant.defaultTheme,
+      theme: AppTheme.defaultTheme,
     );
   }
 }

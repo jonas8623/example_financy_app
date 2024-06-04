@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class AppColorConstant {
   AppColorConstant._();
 
-  static const greenColor1 = Color(0xFF63B5AF);
+  static const secondColor = Color(0xFF63B5AF);
   static const primaryColor = Color(0xFF438883);
   static const List<Color> gradient = [
-    greenColor1,
+    secondColor,
     primaryColor,
   ];
   static const Color white = Colors.white;

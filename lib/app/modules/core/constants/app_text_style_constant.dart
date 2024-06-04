@@ -28,4 +28,9 @@ class AppTextStyleConstant {
     fontWeight: FontWeight.w400,
     color: AppColorConstant.darkGrey,
   );
+
+  static final TextStyle inputHintTextStyle = GoogleFonts.inter(
+    fontSize: 12.0,
+    fontWeight: FontWeight.w400,
+  );
 }

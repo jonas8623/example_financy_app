@@ -8,9 +8,28 @@ mixin ValidationMixin {
     return null;
   }
 
-  String? hasNumber(String? value) {
-    final expressionNumber = RegExp(AppConstant.expressionNumber);
-    if (!expressionNumber.hasMatch(value!)) return "This field has number";
+  String? validateName(String? value) {
+    final expressionName = RegExp(AppConstant.regexName);
+    if (!expressionName.hasMatch(value!)) return "This is field incorrect";
+    return null;
+  }
+
+  String? isEmailValid(String? value) {
+    final expressionEmail = RegExp(AppConstant.regexEmail);
+    if (!expressionEmail.hasMatch(value!)) return "This email is incorrect";
+    return null;
+  }
+
+  String? isPasswordValid(String? value, String? response) {
+    final expressionPassword = RegExp(AppConstant.regexPassword);
+    if (!expressionPassword.hasMatch(value!)) {
+      return response;
+    }
+    return null;
+  }
+
+  String? validateConfirmPassword(String password, String confirmPassword) {
+    if (password != confirmPassword) return "The password are different";
     return null;
   }
 

@@ -92,6 +92,7 @@ class _TextFormFieldComponentState extends State<TextFormFieldComponent> {
         focusedBorder: _defaultBorder,
         errorBorder: _errorBorder,
         focusedErrorBorder: _errorBorder,
+        errorMaxLines: 3,
         suffixIcon: widget.isPassword
             ? IconButton(
                 onPressed: () {

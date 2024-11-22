@@ -1,11 +1,26 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:example_financy/app/modules/core/_export_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
-import '../../login/_export_login.dart';
-import '../constants/app_color_constant.dart';
+import '../_export_authentication.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  late final AuthenticationStoreAction _authenticationStoreAction;
+
+  @override
+  void initState() {
+    _authenticationStoreAction = Modular.get<AuthenticationStoreAction>();
+    validateCredentials();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +41,12 @@ class SplashPage extends StatelessWidget {
         animationDuration: const Duration(seconds: 5),
         backgroundColor: AppColorConstant.backgroundSplash,
         nextScreen: const OnBoardingPage(),
-        nextRoute: "/login/",
+        nextRoute: "/onBoarding",
       ),
     );
+  }
+
+  void validateCredentials() async {
+    await _authenticationStoreAction.decodeUserJson();
   }
 }

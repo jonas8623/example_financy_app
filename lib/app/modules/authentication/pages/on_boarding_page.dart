@@ -41,7 +41,7 @@ class OnBoardingPage extends StatelessWidget {
             ),
             ButtonComponent(
               text: "Get Started",
-              onTap: () => Modular.to.navigate("sign_up"),
+              onTap: () => Modular.to.pushNamed("/signUp"),
             ),
             RichTextComponent(
               textStyle: AppTextStyleConstant.smallText.copyWith(
@@ -50,6 +50,7 @@ class OnBoardingPage extends StatelessWidget {
               textStyleAction: AppTextStyleConstant.smallText.copyWith(),
               text: "Already have account? ",
               textAction: "Sign in",
+              onTap: () => Modular.to.pushNamed("signIn"),
             ),
             _padding(top: 40.0)
           ],

@@ -1,20 +1,22 @@
+import 'package:example_financy/app/modules/authentication/_export_authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../core/_export_core.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SigInPage extends StatefulWidget {
+  const SigInPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SigInPage> createState() => _SigInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
+class _SigInPageState extends State<SigInPage> with ValidationMixin {
   late final GlobalKey<FormState> _formKey;
-  late final TextEditingController _nameController;
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
-  late final TextEditingController _confirmPasswordController;
+  late final AuthenticationStoreState _authenticationStoreState;
+  late final AuthenticationStoreAction _authenticationStoreAction;
 
   Widget _text({
     required String title,
@@ -62,60 +64,59 @@ class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
         child: Column(
           children: [
             _textFormField(
-                controller: _nameController,
-                labelText: "Your name",
-                hintText: "JOHN DOE",
-                textInputType: TextInputType.name,
-                textCapitalization: TextCapitalization.words,
-                formatters: [UpperCaseTextFormatted()],
-                validator: (value) {
-                  validationList([
-                    () => isNotEmpty(value),
-                    () => hasNumber(value),
-                  ]);
-                  return null;
-                }),
-            _textFormField(
               controller: _emailController,
               labelText: "Email",
               hintText: "teste@gmail.com.br",
               textInputType: TextInputType.emailAddress,
+              validator: (value) => validationList([
+                () => isNotEmpty(value),
+                () => isEmailValid(value),
+              ]),
             ),
             _textFormField(
               controller: _passwordController,
               labelText: "Your password",
               isPassword: true,
-              helperText:
-                  "Must have at least 8 characters, 1 capital letter and 1 number",
+              // helperText: _helperText,
+              validator: (value) => validationList(
+                [
+                  () => isNotEmpty(value),
+                  () => isPasswordValid(
+                        value,
+                        "",
+                        // _helperText,
+                      ),
+                ],
+              ),
             ),
-            _textFormField(
-              controller: _confirmPasswordController,
-              labelText: "Confirm your password",
-              isPassword: true,
-              helperText:
-                  "Must have at least 8 characters, 1 capital letter and 1 number",
+            TextButton(
+              onPressed: () {},
+              child: _text(
+                title: "Forgot Password?",
+              ),
             ),
-            const ButtonComponent(text: "Sign Up")
+            ButtonComponent(
+              text: "Sign In",
+              onTap: () => _validate(context),
+            )
           ],
         ),
       );
 
   @override
   void initState() {
+    super.initState();
+    _authenticationStoreState = Modular.get<AuthenticationStoreState>();
+    _authenticationStoreAction = Modular.get<AuthenticationStoreAction>();
     _formKey = GlobalKey<FormState>();
-    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    _confirmPasswordController = TextEditingController();
-    super.initState();
   }
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -127,20 +128,42 @@ class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
           child: Column(
             children: [
               _text(
-                title: "Spend Smarter",
+                title: "Welcome Back",
                 textStyle: AppTextStyleConstant.onBoardingTextStyle,
               ),
-              _text(
-                title: "Save More",
-                textStyle: AppTextStyleConstant.onBoardingTextStyle,
-              ),
-              Image.asset("assets/images/sign_up.png"),
+              Image.asset(AssetConstant.signInImage),
               _form(),
-              _padding(top: 16.0),
+              RichTextComponent(
+                textStyle: AppTextStyleConstant.smallText.copyWith(
+                  color: AppColorConstant.greyColor,
+                ),
+                textStyleAction: AppTextStyleConstant.smallText.copyWith(),
+                text: "Don't have account? ",
+                textAction: "Sign Up",
+                onTap: () => Modular.to.pushReplacementNamed("signUp"),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _validate(context) async {
+    if (_formKey.currentState!.validate()) {
+      await _authenticationStoreAction.signIn(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+    }
+    // else {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(
+    //       backgroundColor: Colors.red,
+    //       content: Text("ERROR FORM"),
+    //     ),
+    //   );
+    //   debugPrint("ERROR FORM");
+    // }
   }
 }

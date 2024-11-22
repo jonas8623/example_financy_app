@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "422968856584",
+    "project_id": "financy-app-29581",
+    "storage_bucket": "financy-app-29581.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422968856584:android:11d1357f95fba93e7fc1bd",
+        "android_client_info": {
+          "package_name": "quirino.jonas.example_financy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiU5kU95F8krFGOar-XF9XJKmATcjmXd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -541,6 +541,13 @@
             </list>
           </value>
         </entry>
+        <entry key="mocktail">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/mocktail-1.0.4/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="modular_core">
           <value>
             <list>
@@ -937,6 +944,7 @@
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/mime-1.0.5/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/mobx-2.3.3+2/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/mobx_codegen-2.6.1/lib" />
+      <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/mocktail-1.0.4/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/modular_core-3.3.3/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/nested-1.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/package_config-2.1.0/lib" />

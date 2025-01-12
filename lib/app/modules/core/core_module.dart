@@ -5,5 +5,6 @@ class CoreModule extends Module {
   @override
   void exportedBinds(Injector i) {
     i.add<CoreInterface>(FirebaseService.new);
+    i.addInstance<SecureStorage>(SecureStorage());
   }
 }

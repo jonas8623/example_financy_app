@@ -13,9 +13,12 @@ abstract class BaseAuthenticationStoreAction with Store {
   final AuthenticationStoreState _authenticationStoreState =
       Modular.get<AuthenticationStoreState>();
   final CoreInterface _authenticationInterface;
-  final _secureStorage = SecureStorage();
+  final SecureStorage _secureStorage;
 
-  BaseAuthenticationStoreAction(this._authenticationInterface);
+  BaseAuthenticationStoreAction(
+    this._authenticationInterface,
+    this._secureStorage,
+  );
 
   @action
   Future<void> _storeUserData() async {

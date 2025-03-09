@@ -41,11 +41,28 @@ mixin _$AuthenticationStoreState on BaseAuthenticationStoreState, Store {
     });
   }
 
+  late final _$helperTextAtom =
+      Atom(name: 'BaseAuthenticationStoreState.helperText', context: context);
+
+  @override
+  String get helperText {
+    _$helperTextAtom.reportRead();
+    return super.helperText;
+  }
+
+  @override
+  set helperText(String value) {
+    _$helperTextAtom.reportWrite(value, super.helperText, () {
+      super.helperText = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-userModel: ${userModel}
+userModel: ${userModel},
+helperText: ${helperText}
     ''';
   }
 }

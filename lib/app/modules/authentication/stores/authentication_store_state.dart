@@ -12,4 +12,8 @@ abstract class BaseAuthenticationStoreState with Store {
 
   @observable
   UserModel? userModel;
+
+  @observable
+  String helperText =
+      "Must have at least 8 characters, 1 capital letter and 1 number";
 }

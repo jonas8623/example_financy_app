@@ -8,7 +8,7 @@ void main() {
   late FirebaseAuthenticationServiceMock firebaseAuthenticationServiceMock;
   late UserModel userModel;
 
-  setUp(() {
+  setUpAll(() {
     firebaseAuthenticationServiceMock = FirebaseAuthenticationServiceMock();
     userModel = UserModel(
       name: "Test",

@@ -18,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     _authenticationStoreAction = Modular.get<AuthenticationStoreAction>();
-    validateCredentials();
+    _validateCredentials();
     super.initState();
   }
 
@@ -46,7 +46,6 @@ class _SplashPageState extends State<SplashPage> {
     );
   }
 
-  void validateCredentials() async {
-    await _authenticationStoreAction.decodeUserJson();
-  }
+  void _validateCredentials() async =>
+      await _authenticationStoreAction.decodeUserJson();
 }

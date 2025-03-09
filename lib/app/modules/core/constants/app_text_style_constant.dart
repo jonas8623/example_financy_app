@@ -19,7 +19,7 @@ class AppTextStyleConstant {
 
   static final smallText = GoogleFonts.inter(
     fontSize: 16.0,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.bold,
     color: AppColorConstant.primaryColor,
   );
 

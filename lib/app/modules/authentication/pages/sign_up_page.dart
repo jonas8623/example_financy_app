@@ -18,8 +18,6 @@ class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   late final TextEditingController _confirmPasswordController;
-  final String _helperText =
-      "Must have at least 8 characters, 1 capital letter and 1 number";
   late final AuthenticationStoreState _authenticationStoreState;
   late final AuthenticationStoreAction _authenticationStoreAction;
 
@@ -95,13 +93,13 @@ class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
               controller: _passwordController,
               labelText: "Your password",
               isPassword: true,
-              helperText: _helperText,
+              helperText: _authenticationStoreState.helperText,
               validator: (value) => validationList(
                 [
                   () => isNotEmpty(value),
                   () => isPasswordValid(
                         value,
-                        _helperText,
+                        _authenticationStoreState.helperText,
                       ),
                 ],
               ),
@@ -124,9 +122,7 @@ class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
                 }
                 return ButtonComponent(
                   text: "Sign Up",
-                  onTap: () async {
-                    await _validate(context);
-                  },
+                  onTap: () async => await _validateForm(context),
                 );
               },
             ),
@@ -189,7 +185,7 @@ class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
     );
   }
 
-  Future<void> _validate(context) async {
+  Future<void> _validateForm(context) async {
     if (_formKey.currentState!.validate()) {
       await _authenticationStoreAction.signUp(
         name: _nameController.text,
@@ -197,24 +193,13 @@ class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
         password: _passwordController.text,
       );
       debugPrint("USER IS NULL: ${_authenticationStoreState.userModel}");
-      //     .then((onValue) {
-      //   if (onValue) {
-      //     ScaffoldMessenger.of(context).showSnackBar(
-      //       const SnackBar(
-      //         content: Text("Sucesso ao se logar"),
-      //       ),
-      //     );
-      //   }
-      // });
+    } else {
+      displaySnackBar(context);
     }
-    // else {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(
-    //       backgroundColor: Colors.red,
-    //       content: Text("ERROR FORM"),
-    //     ),
-    //   );
-    //   debugPrint("ERROR FORM");
-    // }
   }
+
+  void displaySnackBar(BuildContext context) =>
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text("Ops, tem algum campo inválido")));
 }

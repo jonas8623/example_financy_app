@@ -10,14 +10,14 @@ class AuthenticationStoreAction = BaseAuthenticationStoreAction
     with _$AuthenticationStoreAction;
 
 abstract class BaseAuthenticationStoreAction with Store {
-  final AuthenticationStoreState _authenticationStoreState =
-      Modular.get<AuthenticationStoreState>();
+  final AuthenticationStoreState _authenticationStoreState;
   final CoreInterface _authenticationInterface;
   final SecureStorage _secureStorage;
 
   BaseAuthenticationStoreAction(
     this._authenticationInterface,
     this._secureStorage,
+    this._authenticationStoreState,
   );
 
   @action
@@ -48,7 +48,7 @@ abstract class BaseAuthenticationStoreAction with Store {
         name: name,
       );
 
-      _storeUserData();
+      await _storeUserData();
       return true;
     } catch (e) {
       return false;
